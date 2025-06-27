@@ -1,5 +1,5 @@
 from flask import url_for, jsonify, Blueprint, request
-from connection import conn
+from app.connection import conn
 from werkzeug.security import check_password_hash
 
 auth_bp = Blueprint('auth', __name__)
@@ -12,7 +12,7 @@ def login():
         }, 200
     )
 
-@auth_bp.route('/register', method=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def register():
 
     data = request.json
@@ -23,23 +23,24 @@ def register():
 
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute(f'INSERT INTO user (name, password, email) values ({name}, {password}, {email});')
-
-    signal = cursor.fetchone()
-
-    id_new_user = cursor.execute(f'SELECT id FROM user WHERE name, email LIKE {name}, {email};')
-
-    
-
-    if signal:
-        return jsonify(
-            {
-                "message": "Usuário cadastrado com sucesso!",
-                "usuário":{
-
-                }
-            }, 201
+    try:
+        cursor.execute(
+            "INSERT INTO user (name, password, email) VALUES (%s, %s, %s)",
+            (name, password, email)
         )
+        conn.commit()
 
+        user_id = cursor.lastrowid  # ID do novo usuário
 
-    return "a"
+        return jsonify({
+            "message": "Usuário cadastrado com sucesso!",
+            "usuario": {
+                "id": user_id,
+                "name": name,
+                "email": email
+            }
+        }), 201
+
+    except Exception as e:
+        print(f"Erro ao inserir usuário: {e}")
+        return jsonify({"error": "Erro ao criar usuário. Tente novamente!"}), 500
