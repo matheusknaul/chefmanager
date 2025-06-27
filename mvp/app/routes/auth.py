@@ -4,13 +4,38 @@ from werkzeug.security import check_password_hash
 
 auth_bp = Blueprint('auth', __name__)
 
-@auth_bp.route('/login', methods=['GET'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    return jsonify(
-        {
-            "message": "Login"
-        }, 200
-    )
+    
+    if request.method == "GET":
+        return jsonify({"message": "Digite seu email e senha"})
+    elif request.method == "POST":
+        data = request.json
+        email = data.get("email")
+        password = data.get("password")
+
+        cursor = conn.cursor(dictionary=True)
+
+        try:
+            cursor.execute(
+                "SELECT id, email, password FROM user WHERE email = %s AND password = %s",
+                (email, password)
+            )
+            user = cursor.fetchone()
+
+            if(user):
+                return jsonify({"message": "bem vindo!", "user": {
+                    "id": user["id"],
+                    "email": user["email"],
+                    "password": user["password"]
+                }
+                }, 200)
+            else:
+                return jsonify({"error": "Usuário não encontrado."}), 500
+        except Exception as e:
+            print(f"Erro ao inserir usuário: {e}")
+            return jsonify({"error": "ocorreu um erro."}), 500
+
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
