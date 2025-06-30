@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Ingredientes</title>
+  <link rel="stylesheet" href="style-ingredients.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Menu Lateral -->
+    <aside class="sidebar">
+      <h2>Chef Management</h2>
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Ingredientes</a></li>
+          <li><a href="#">Receitas</a></li>
+          <li><a href="#">Estoque</a></li>
+          <li><a href="#">Relatórios</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main">
+      <header class="top-bar">
+        <h1>Ingredientes</h1>
+        <div class="top-actions">
+          <button class="btn" onclick="openModal()">+ Novo Ingrediente</button>
+          <div class="indicators">
+            <span>Total: <strong>124</strong></span>
+            <span>Faltando: <strong>12</strong></span>
+          </div>
+        </div>
+      </header>
+
+      <section class="ingredients-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Categoria</th>
+              <th>Quantidade</th>
+              <th>Unidade</th>
+              <th>Validade</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tomate</td>
+              <td>Hortifruti</td>
+              <td>10</td>
+              <td>kg</td>
+              <td>10/07/2025</td>
+              <td><button class="btn-small">Editar</button></td>
+            </tr>
+            <tr>
+              <td>Leite</td>
+              <td>Laticínios</td>
+              <td>5</td>
+              <td>L</td>
+              <td>05/07/2025</td>
+              <td><button class="btn-small">Editar</button></td>
+            </tr>
+            <!-- Mais ingredientes aqui -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal de Cadastro -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Novo Ingrediente</h2>
+      <form>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="categoria">Categoria:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" required>
+
+        <label for="unidade">Unidade:</label>
+        <input type="text" id="unidade" name="unidade" required>
+
+        <label for="validade">Validade:</label>
+        <input type="date" id="validade" name="validade" required>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn">Salvar</button>
+          <button type="button" class="btn cancel" onclick="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
