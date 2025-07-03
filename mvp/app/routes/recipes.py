@@ -29,11 +29,12 @@ def create():
 
     title = data.get('title')
     description = data.get('description')
+    user_id = data.get('user_id')
 
     try:
         cursor.execute(
-            "INSERT INTO recipe (title, description) VALUES (%s, %s)",
-            (title, description)
+            "INSERT INTO recipe (title, user_id , description) VALUES (%s, %s, %s)",
+            (title, user_id , description)
         )
         conn.commit()
 
@@ -43,6 +44,7 @@ def create():
             "message": "Receita cadastrada com sucesso!",
             "recipe": {
                 "id": recipe_id,
+                "user_id": user_id,
                 "title": title,
                 "description": description
             }

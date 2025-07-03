@@ -40,6 +40,10 @@ def create():
 
         ingredient_id = cursor.lastrowid  
 
+        cursor.execute(
+            
+        )
+
         return jsonify({
             "message": "Ingrediente cadastrado com sucesso!",
             "recipe": {
@@ -49,7 +53,6 @@ def create():
                 "default_unit_id": default_unit_id
             }
         }), 201
-
     except Exception as e:
         print(f"Erro ao tentar cadastrar o ingrediente: {e}")
         return jsonify({"error": "Erro ao cadastrar o ingrediente, tente novamente!"}), 500

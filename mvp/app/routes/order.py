@@ -31,22 +31,34 @@ def create():
     user_id = data.get('user_id')
     description = data.get('description')
 
+    recipes = data.get('recipes')
+
+    if not user_id or not recipes or not isinstance(recipes, list):
+        return jsonify({"error": "Dados inválidos."}), 400
+
     try:
         cursor.execute(
             "INSERT INTO order_app (user_id, description) VALUES (%s, %s)",
             (user_id, description)
         )
-        conn.commit()
+        order_id = cursor.lastrowid
+        for recipe_id in recipes:  
 
-        order_id = cursor.lastrowid  
+            cursor.execute(
+                "INSERT INTO order_recipe (order_id, recipe_id) VALUES (%s, %s)",
+                (order_id, recipe_id))
+            
+        conn.commit()
 
         return jsonify({
             "message": "Pedido feito com sucesso!",
-            "recipe": {
+            "order": {
                 "id": order_id,
                 "user_id": user_id,
                 "description": description
-            }
+            },
+            "recipes": recipes
+
         }), 201
 
     except Exception as e:
