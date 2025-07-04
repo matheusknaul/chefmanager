@@ -116,6 +116,41 @@ def register_ingredient_exit():
         print(f"Error: {e}")
         return jsonify({"error": "An error occurred while trying to register the ingredient exit."}), 500
 
+# @ingredients_bp.route('/stock/total')
+# def get_ingredient_stock_total_by():
+#     pass
+
+@ingredients_bp.route('/stock/<int:id>')
+def get_ingredient_stock_by_id(id):
+    
+    cursor.execute("""
+        SELECT
+            COALESCE((SELECT SUM(quantity) FROM ingredient_stock_entry WHERE ingredient_id = %s), 0)
+            -
+            COALESCE((SELECT SUM(quantity) FROM ingredient_stock_exit WHERE ingredient_id = %s), 0)
+            AS current_stock
+    """, (id, id))
+
+    result = cursor.fetchone()
+    current_stock = result['current_stock']
+
+    cursor.execute("SELECT id, name FROM ingredient WHERE id = %s", (id))
+
+    ingredient = cursor.fetchone()
+
+    return jsonify({
+        "id": ingredient['id'],
+        "name": ingredient['name'],
+        "current_stock": float(current_stock)
+    }), 200
+
+
+@ingredients_bp.route('/<int:id>', methods=['GET'])
+def get_by_id(id):
+    cursor.execute("SELECT * FROM ingredient WHERE id = %s", (id,))
+    ingredient = cursor.fetchone()
+
+
 
 
 @ingredients_bp.route('/update/<int:id>', methods=['PUT'])
