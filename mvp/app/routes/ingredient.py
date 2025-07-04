@@ -145,14 +145,6 @@ def get_ingredient_stock_by_id(id):
     }), 200
 
 
-@ingredients_bp.route('/<int:id>', methods=['GET'])
-def get_by_id(id):
-    cursor.execute("SELECT * FROM ingredient WHERE id = %s", (id,))
-    ingredient = cursor.fetchone()
-
-
-
-
 @ingredients_bp.route('/update/<int:id>', methods=['PUT'])
 def update(id):
     data = request.json
