@@ -40,10 +40,6 @@ def create():
 
         ingredient_id = cursor.lastrowid  
 
-        cursor.execute(
-            
-        )
-
         return jsonify({
             "message": "Ingrediente cadastrado com sucesso!",
             "recipe": {
@@ -56,6 +52,71 @@ def create():
     except Exception as e:
         print(f"Erro ao tentar cadastrar o ingrediente: {e}")
         return jsonify({"error": "Erro ao cadastrar o ingrediente, tente novamente!"}), 500
+
+
+@ingredients_bp.route('/stock/entry', methods=['POST'])
+def register_ingredient_entry():
+
+    data = request.json
+
+    ingredient_id = data.get('ingredient_id')
+    quantity = data.get('quantity')
+    user_id = data.get('user_id')
+
+    try:
+        cursor.execute(
+            "INSER INTO ingredient_stock_entry (ingredient_id, quantity, user_id) VALUES (%s, %s, %s)",
+            (ingredient_id, quantity, user_id)
+        )
+        conn.commit()
+
+        register_id = cursor.lastrowid
+
+        return jsonify({
+            "message": f"Entrada do ingrediente {ingredient_id}, registrada com sucesso!",
+            "register": {
+                "id": register_id,
+                "ingredient_id": ingredient_id,
+                "quantity": quantity,
+                "user_id": user_id
+            }
+        }), 201
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "An error occurred while trying to register the ingredient entry."}), 500
+
+@ingredients_bp.route('/stock/exit/<int:id>', methods=['POST'])
+def register_ingredient_exit():
+
+    data = request.json
+
+    ingredient_id = data.get('ingredient_id')
+    quantity = data.get('quantity')
+    user_id = data.get('user_id')
+
+    try:
+        cursor.execute(
+            "INSER INTO ingredient_stock_exit (ingredient_id, quantity, user_id) VALUES (%s, %s, %s)",
+            (ingredient_id, quantity, user_id)
+        )
+        conn.commit()
+
+        register_id = cursor.lastrowid
+
+        return jsonify({
+            "message": f"Saída do ingrediente {ingredient_id}, registrada com sucesso!",
+            "register": {
+                "id": register_id,
+                "ingredient_id": ingredient_id,
+                "quantity": quantity,
+                "user_id": user_id
+            }
+        }), 201
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "An error occurred while trying to register the ingredient exit."}), 500
+
+
 
 @ingredients_bp.route('/update/<int:id>', methods=['PUT'])
 def update(id):
