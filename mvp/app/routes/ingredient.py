@@ -85,7 +85,7 @@ def register_ingredient_entry():
         print(f"Error: {e}")
         return jsonify({"error": "An error occurred while trying to register the ingredient entry."}), 500
 
-@ingredients_bp.route('/stock/exit/<int:id>', methods=['POST'])
+@ingredients_bp.route('/stock/exit', methods=['POST'])
 def register_ingredient_exit():
 
     data = request.json
