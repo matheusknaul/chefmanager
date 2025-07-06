@@ -1,0 +1,37 @@
+name: CI/CD Java Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Give permission to gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build and testind
+        run: ./gradlew clean build
+
+      - name: Publish test resume (JUnit)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: build/test-results/test/
+
+    # Optional: Automatic deploy (example for Heroku, Render, FTP, etc.)
+    # - name: Deploy for production
+    #   run: ./scripts/deploy.sh
