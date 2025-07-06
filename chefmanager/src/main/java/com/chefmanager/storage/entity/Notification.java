@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a unique notification in the system.
+ * */
+
 @Entity
 @Table(name = "Notifications")
 public class Notification extends BaseEntity{
@@ -67,9 +71,6 @@ public class Notification extends BaseEntity{
     protected Notification(){
 
     }
-
-
-
 
     public Integer getId() {
         return id;
