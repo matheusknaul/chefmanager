@@ -23,7 +23,7 @@ def get_by_id(id):
     else:
         jsonify({"message": "Ingredient not found!"}), 404
 
-@ingredients_bp.route('/create', methods=['POST'])
+@ingredients_bp.route('/create', methods=['POST']) #TODO:passar create para "/" adicionando o método 'POST'.
 def create():
     data = request.json
 
