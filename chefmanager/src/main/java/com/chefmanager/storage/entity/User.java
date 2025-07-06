@@ -24,9 +24,9 @@ public class User  extends BaseEntity{
     @JoinColumn(name = "accountId")
     private Account account;
 
-//    @ManyToOne
-//    @JoinColumn(name = "kitchenId")
-//    private Kitchen kitchen;
+    @ManyToOne
+    @JoinColumn(name = "kitchenId")
+    private Kitchen kitchen;
 
     @Column(nullable = false, insertable = false, updatable = false)
     private String kitchenId;
