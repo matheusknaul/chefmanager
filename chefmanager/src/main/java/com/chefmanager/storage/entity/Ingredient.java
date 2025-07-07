@@ -21,11 +21,9 @@ public class Ingredient extends BaseEntity{
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "stockId")
     private IngredientStock stock;
 
     @ManyToOne
-    @JoinColumn(name = "unitId")
     private Unit unit;
 
     @UpdateTimestamp

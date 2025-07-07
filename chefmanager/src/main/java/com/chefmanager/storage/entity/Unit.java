@@ -37,19 +37,31 @@ public class Unit extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "unit")
     @Column(nullable = false)
     private Set<Ingredient> ingredients = new HashSet<>();
 
+    @ManyToOne()
+    @JoinColumn(name = "stock")
+    private IngredientStock stock;
 
     protected Unit(){
 
     }
 
-    protected Unit(String title, String abTitle, String unitType){
+    protected Unit(String title, String abTitle, String unitType, IngredientStock stock){
         this.setTitle(title);
         this.setAbTitle(abTitle);
         this.setUnitType(unitType);
+        this.setStock(stock);
+    }
+
+    public IngredientStock getStock() {
+        return stock;
+    }
+
+    public void setStock(IngredientStock stock) {
+        this.stock = stock;
     }
 
     public Integer getId() {

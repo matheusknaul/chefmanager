@@ -92,7 +92,7 @@ public class User  extends BaseEntity{
 
     public void setKitchen(Kitchen kitchen){
         this.kitchen = kitchen;
-        this.kitchenId = kitchen.getId();
+        this.kitchenId = String.valueOf(kitchen.getId());
     }
 
     public void setEmail(String email) {
@@ -116,7 +116,7 @@ public class User  extends BaseEntity{
     }
 
     public void generateNewRegistrationKey(){
-        this.setRegKey(generateNewRegistrationKey());
+        this.setRegKey(generateRegistrationKey());
     }
 
     private String generateRegistrationKey(){
@@ -125,7 +125,7 @@ public class User  extends BaseEntity{
          * TODO: Create an class String Helper to
          * encrypt the registration key.
          */
-        /
+
 
         String uniqueId = this.email + '%' + this.kitchen.getId();
 

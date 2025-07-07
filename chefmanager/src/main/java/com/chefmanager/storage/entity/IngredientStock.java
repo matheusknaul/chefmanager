@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "stock")
 public class IngredientStock extends BaseEntity{
 
     @Id
@@ -24,7 +26,7 @@ public class IngredientStock extends BaseEntity{
     @OneToMany(mappedBy = "stock")
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(mappedBy = "stock")
     private Set<Unit> units = new HashSet<>();
 
     protected IngredientStock(){}
