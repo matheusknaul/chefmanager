@@ -19,8 +19,7 @@ public class IngredientStock extends BaseEntity{
     @Column(nullable = false, updatable = false)
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "kitchenId", nullable = false)
+    @ManyToOne
     private Kitchen kitchen;
 
     @OneToMany(mappedBy = "stock")

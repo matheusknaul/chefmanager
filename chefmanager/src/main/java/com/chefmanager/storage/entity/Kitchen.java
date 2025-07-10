@@ -25,8 +25,7 @@ public class Kitchen {
     @OneToMany(mappedBy = "kitchen")
     private List<User> users = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "stockId", nullable = false)
+    @OneToMany(mappedBy = "kitchen")
     private IngredientStock stock;
 
     @Column(nullable = false, insertable = false, updatable = false)

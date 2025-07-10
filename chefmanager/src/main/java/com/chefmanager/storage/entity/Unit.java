@@ -41,6 +41,9 @@ public class Unit extends BaseEntity{
     @Column(nullable = false)
     private Set<Ingredient> ingredients = new HashSet<>();
 
+    @ManyToOne
+    private User user;
+
     @ManyToOne()
     @JoinColumn(name = "stock")
     private IngredientStock stock;
@@ -75,6 +78,10 @@ public class Unit extends BaseEntity{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public User getUser() {return user;}
+
+    public void setUser(User user) {this.user = user;}
 
     public String getAbTitle() {
         return abTitle;

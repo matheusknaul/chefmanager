@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -27,6 +29,15 @@ public class User  extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "kitchenId")
     private Kitchen kitchen;
+
+    @OneToMany(mappedBy = "user")
+    private List<Recipe> recipes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Ingredient> ingredients = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Unit> units = new ArrayList<>();
 
     @Column(nullable = false, insertable = false, updatable = false)
     private String kitchenId;
@@ -76,6 +87,34 @@ public class User  extends BaseEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
+    }
+
+    public void setKitchenId(String kitchenId) {
+        this.kitchenId = kitchenId;
     }
 
     public String getEmail() {

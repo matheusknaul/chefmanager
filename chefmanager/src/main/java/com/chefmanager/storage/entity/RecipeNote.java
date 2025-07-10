@@ -21,18 +21,6 @@ public class RecipeNote extends BaseEntity{
     @ManyToOne
     private Recipe recipe;
 
-//    @Column(nullable = false)
-//    private Integer preparationTimeInMinutes;
-//
-//    @Column(nullable = false)
-//    private String preparationInstructions;
-//
-//    @Column(nullable = false)
-//    private String finalizationInstructions;
-//
-//    @Column(nullable = false)
-//    private String observations;
-
     @Column(columnDefinition = "TEXT")
     private StringDocTopic instructions;
 
