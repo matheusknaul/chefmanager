@@ -13,7 +13,6 @@ public class StringTopicTest {
                 "}";
 
         StringTopic topic = new StringTopic("Modo de preparo", "misturar ovo, manteiga e farinha");
-
-        assertEquals(expected, topic.toString());
+        assertEquals(expected, topic.toJsonString());
     }
 }

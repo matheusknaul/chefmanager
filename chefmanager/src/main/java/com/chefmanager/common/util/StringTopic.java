@@ -14,7 +14,19 @@ public class StringTopic {
         this.setDescription(description);
     }
 
-    public String toString(){
+    /**
+     * Use this only when getting json from database.
+     * */
+    public StringTopic(String jsonString){
+        jsonString = jsonString.replaceAll("[\\\\{\\\\}\\\\n\\\\r]","");
+        jsonString = jsonString.replace("\"description\": ", "");
+        jsonString = jsonString.replace("\"title\": ", "");
+        String[] elements = jsonString.split(",");
+        this.setTitle(elements[0]);
+        this.setDescription(elements[1]);
+    }
+
+    public String toJsonString(){
         StringBuilder str = new StringBuilder();
         str.append("{\n");
         str.append("  \"title\": \"").append(getTitle()).append("\",\n");
@@ -22,16 +34,6 @@ public class StringTopic {
         str.append("}");
 
         return str.toString();
-    }
-
-    public String toJson(){
-        StringBuilder json = new StringBuilder();
-        json.append("{\n");
-        json.append("  \"title\": \"").append(getTitle()).append("\",\n");
-        json.append("  \"description\": \"").append(getDescription()).append("\n");
-        json.append("}");
-
-        return json.toString();
     }
 
     public String fromJson(){
