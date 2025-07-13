@@ -1,7 +1,6 @@
 package com.chefmanager.storage.entity;
 
 import com.chefmanager.common.datatransfer.RecipeNoteStatus;
-import com.chefmanager.common.util.StringDocTopic;
 import com.chefmanager.common.util.StringTopic;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -40,7 +39,7 @@ public class RecipeNote extends BaseEntity{
         this.setRecipe(recipe);
     }
 
-    public RecipeNote(String title, StringDocTopic instructions, Recipe recipe) {
+    public RecipeNote(String title, StringTopic instructions, Recipe recipe) {
         this.setTitle(title);
         this.setInstructions(instructions);
         this.setRecipe(recipe);
@@ -66,11 +65,11 @@ public class RecipeNote extends BaseEntity{
         this.recipe = recipe;
     }
 
-    public StringDocTopic getInstructions() {
+    public StringTopic getInstructions() {
         return instructions;
     }
 
-    public void setInstructions(StringDocTopic instructions) {
+    public void setInstructions(StringTopic instructions) {
         this.instructions = instructions;
     }
 

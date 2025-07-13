@@ -18,7 +18,7 @@ public class StringTopic {
         StringBuilder str = new StringBuilder();
         str.append("{\n");
         str.append("  \"title\": \"").append(getTitle()).append("\",\n");
-        str.append("  \"description\": \"").append(getDescription()).append("\n");
+        str.append("  \"description\": \"").append(getDescription()).append("\"\n");
         str.append("}");
 
         return str.toString();

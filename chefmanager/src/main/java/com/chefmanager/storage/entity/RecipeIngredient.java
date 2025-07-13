@@ -1,6 +1,6 @@
 package com.chefmanager.storage.entity;
 
-import com.chefmanager.common.util.StringDocTopic;
+import com.chefmanager.common.util.StringTopic;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -25,12 +25,12 @@ public class RecipeIngredient extends BaseEntity{
     private BigDecimal quantity;
 
     @Column(columnDefinition = "text")
-    private StringDocTopic note;
+    private StringTopic note;
 
     protected RecipeIngredient() {
     }
 
-    protected RecipeIngredient(Ingredient ingredient, Recipe recipe, BigDecimal quantity, StringDocTopic note) {
+    protected RecipeIngredient(Ingredient ingredient, Recipe recipe, BigDecimal quantity, StringTopic note) {
         this.setIngredient(ingredient);
         this.setRecipe(recipe);
         this.setQuantity(quantity);
@@ -65,11 +65,11 @@ public class RecipeIngredient extends BaseEntity{
         this.quantity = quantity;
     }
 
-    public StringDocTopic getNote() {
+    public StringTopic getNote() {
         return note;
     }
 
-    public void setNote(StringDocTopic note) {
+    public void setNote(StringTopic note) {
         this.note = note;
     }
 }
