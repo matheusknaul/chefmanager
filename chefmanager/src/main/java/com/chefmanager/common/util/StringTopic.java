@@ -18,10 +18,15 @@ public class StringTopic {
      * Use this only when getting json from database.
      * */
     public StringTopic(String jsonString){
-        jsonString = jsonString.replaceAll("[\\\\{\\\\}\\\\n\\\\r]","");
-        jsonString = jsonString.replace("\"description\": ", "");
-        jsonString = jsonString.replace("\"title\": ", "");
-        String[] elements = jsonString.split(",");
+
+        /**
+         * Make the code safer and better in the next refactoring.
+         * */
+
+        jsonString = jsonString.replaceAll("[\\{\\}\\n\\r\"]","");
+        jsonString = jsonString.replace("description: ", "");
+        jsonString = jsonString.replace("title: ", "");
+        String[] elements = jsonString.split(",",2);
         this.setTitle(elements[0]);
         this.setDescription(elements[1]);
     }
@@ -29,16 +34,11 @@ public class StringTopic {
     public String toJsonString(){
         StringBuilder str = new StringBuilder();
         str.append("{\n");
-        str.append("  \"title\": \"").append(getTitle()).append("\",\n");
-        str.append("  \"description\": \"").append(getDescription()).append("\"\n");
+        str.append("\"title\": \"").append(getTitle()).append("\",\n");
+        str.append("\"description\": \"").append(getDescription()).append("\"\n");
         str.append("}");
 
         return str.toString();
-    }
-
-    public String fromJson(){
-        String done = new String();
-        return done;
     }
 
     public String getTitle() {
