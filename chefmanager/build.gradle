@@ -38,9 +38,14 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.mockito:mockito-core:5.11.0'
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'org.testcontainers:rabbitmq'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test{
+	useJUnitPlatform()
 }
 
 tasks.named('test') {

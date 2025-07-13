@@ -2,6 +2,7 @@ package com.chefmanager.storage.entity;
 
 import com.chefmanager.common.datatransfer.RecipeNoteStatus;
 import com.chefmanager.common.util.StringDocTopic;
+import com.chefmanager.common.util.StringTopic;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,7 +23,7 @@ public class RecipeNote extends BaseEntity{
     private Recipe recipe;
 
     @Column(columnDefinition = "TEXT")
-    private StringDocTopic instructions;
+    private StringTopic instructions;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
