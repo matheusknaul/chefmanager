@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,12 @@ public class Ingredient extends BaseEntity{
 
     @ManyToOne
     private IngredientStock stock;
+
+    @OneToMany(mappedBy = "ingredient")
+    private List<IngredientEntry> entry;
+
+    @OneToMany(mappedBy = "ingredient")
+    private List<IngredientExit> exit;
 
     @ManyToOne
     private User user;
@@ -74,6 +81,22 @@ public class Ingredient extends BaseEntity{
 
     public void setStock(IngredientStock stock) {
         this.stock = stock;
+    }
+
+    public List<IngredientEntry> getEntry() {
+        return entry;
+    }
+
+    public void setEntry(List<IngredientEntry> entry) {
+        this.entry = entry;
+    }
+
+    public List<IngredientExit> getExit() {
+        return exit;
+    }
+
+    public void setExit(List<IngredientExit> exit) {
+        this.exit = exit;
     }
 
     public Unit getUnit() {

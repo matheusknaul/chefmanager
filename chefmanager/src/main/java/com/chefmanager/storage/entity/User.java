@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents a User
@@ -44,6 +45,9 @@ public class User  extends BaseEntity{
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "user")
+    private Set<OrderLog> orderLog;
 
     @Column(nullable = false)
     private String email;
@@ -103,6 +107,14 @@ public class User  extends BaseEntity{
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Set<OrderLog> getOrderLog() {
+        return orderLog;
+    }
+
+    public void setOrderLog(Set<OrderLog> orderLog) {
+        this.orderLog = orderLog;
     }
 
     public List<Unit> getUnits() {
