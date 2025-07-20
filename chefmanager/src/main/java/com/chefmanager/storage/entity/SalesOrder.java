@@ -1,9 +1,12 @@
 package com.chefmanager.storage.entity;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "SalesOrders")
+@DiscriminatorValue("SALE")
 public class SalesOrder extends Order{
+
+
+
 }

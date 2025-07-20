@@ -1,0 +1,121 @@
+package com.chefmanager.storage.entity;
+
+import com.chefmanager.common.datatransfer.ProductStatus;
+import jakarta.persistence.*;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
+import java.util.List;
+
+@Entity
+@Table(name = "Products")
+public class Product extends BaseEntity{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String description;
+
+    @Transient
+    private List<Recipe> recipes;
+
+    @Column(nullable = false)
+    private String recipeCollection;
+
+    @UpdateTimestamp
+    private Instant updatedAt;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProductStatus productStatus;
+
+    public Product(String title, String description, ProductStatus productStatus) {
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setProductStatus(productStatus);
+        this.setRecipeCollection("empty");
+    }
+
+    public Product(String title, String description, List<Recipe> recipes, ProductStatus productStatus){
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setRecipeCollection(this.recipeListItensToString(recipes));
+        this.setProductStatus(productStatus);
+    }
+
+    public Product(String title, String description){
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setRecipeCollection("empty");
+        this.setProductStatus(ProductStatus.INACTIVE);
+    }
+
+    protected Product(){}
+
+    private String recipeListItensToString(List<Recipe> recipes){
+        StringBuilder recipeCollection = new StringBuilder();
+
+        recipeCollection.append("{");
+
+        recipeCollection.append("}");
+
+        return recipeCollection.toString();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public String getRecipeCollection() {
+        return recipeCollection;
+    }
+
+    public void setRecipeCollection(String recipeCollection) {
+        this.recipeCollection = recipeCollection;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public ProductStatus getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(ProductStatus productStatus) {
+        this.productStatus = productStatus;
+    }
+}

@@ -40,6 +40,9 @@ public class User  extends BaseEntity{
     @OneToMany(mappedBy = "user")
     private List<Unit> units = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
+
     @Column(nullable = false, insertable = false, updatable = false)
     private String kitchenId;
 
@@ -99,6 +102,14 @@ public class User  extends BaseEntity{
 
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public List<Ingredient> getIngredients() {
