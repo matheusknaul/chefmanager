@@ -24,7 +24,7 @@ public class Product extends BaseEntity{
     @Transient
     private List<Recipe> recipes;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String recipeCollection;
 
     @UpdateTimestamp
