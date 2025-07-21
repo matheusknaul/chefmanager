@@ -59,10 +59,20 @@ public class Product extends BaseEntity{
 
     private String recipeListItensToString(List<Recipe> recipes){
         StringBuilder recipeCollection = new StringBuilder();
+        int recipesLength = recipes.size();
 
-        recipeCollection.append("{");
+        recipeCollection.append("{ \"recipes\": [ ");
 
-        recipeCollection.append("}");
+        for(int x = 0; x < recipesLength; x++){
+
+            recipeCollection.append("{\"id\": \"" + recipes.get(x).getId() +  "\","+
+                    "\"title\": \"" + recipes.get(x).getTitle()+ "\"");
+            if(x < recipesLength - 1){
+                recipeCollection.append(",");
+            }
+        }
+
+        recipeCollection.append("]}");
 
         return recipeCollection.toString();
     }
