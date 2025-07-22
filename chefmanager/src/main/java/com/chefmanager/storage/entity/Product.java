@@ -24,6 +24,9 @@ public class Product extends BaseEntity{
     @Transient
     private List<Recipe> recipes;
 
+    @OneToMany(mappedBy = "product")
+    private SalesOrderItem salesOrderItem;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String recipeCollection;
 
@@ -95,6 +98,14 @@ public class Product extends BaseEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public SalesOrderItem getSalesOrderItem() {
+        return salesOrderItem;
+    }
+
+    public void setSalesOrderItem(SalesOrderItem salesOrderItem) {
+        this.salesOrderItem = salesOrderItem;
     }
 
     public List<Recipe> getRecipes() {

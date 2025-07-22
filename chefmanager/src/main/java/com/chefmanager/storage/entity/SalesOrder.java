@@ -3,6 +3,7 @@ package com.chefmanager.storage.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
@@ -10,17 +11,23 @@ import java.util.List;
 @DiscriminatorValue("SALE")
 public class SalesOrder extends Order{
 
-    @Column(columnDefinition = "TEXT")
-    private String productsString;
+//    @Column(columnDefinition = "TEXT")
+//    private String productsString;
+
+    @OneToMany(mappedBy = "salesOrder")
+    private List<SalesOrderItem> salesOrderItems;
 
     private List<Product> productList;
 
     protected SalesOrder() {}
 
-    public SalesOrder(String productsString){this.setProductsString(productsString);}
+//    public SalesOrder(String productsString){this.setProductsString(productsString);}
+//
+//    public SalesOrder(List<Product> productList){ this.setProductsString(this.productListItensToString(productList));}
 
-    public SalesOrder(List<Product> productList){ this.setProductsString(this.productListItensToString(productList));}
-
+    /**
+     * Obsolete
+     * */
     private String productListItensToString(List<Product> productList){
         StringBuilder productCollection = new StringBuilder();
         int productCollectionSize = productList.size();
@@ -42,12 +49,20 @@ public class SalesOrder extends Order{
         return productCollection.toString();
     }
 
-    public String getProductsString() {
-        return productsString;
+//    public String getProductsString() {
+//        return productsString;
+//    }
+//
+//    public void setProductsString(String productsString) {
+//        this.productsString = productsString;
+//    }
+
+    public List<SalesOrderItem> getSalesOrderItems() {
+        return salesOrderItems;
     }
 
-    public void setProductsString(String productsString) {
-        this.productsString = productsString;
+    public void setSalesOrderItems(List<SalesOrderItem> salesOrderItems) {
+        this.salesOrderItems = salesOrderItems;
     }
 
     public List<Product> getProductList() {
