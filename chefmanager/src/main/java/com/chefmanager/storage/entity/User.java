@@ -32,16 +32,19 @@ public class User  extends BaseEntity{
     private Kitchen kitchen;
 
     @OneToMany(mappedBy = "user")
-    private List<Recipe> recipes = new ArrayList<>();
+    private List<Recipe> recipes;
 
     @OneToMany(mappedBy = "user")
-    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Ingredient> ingredients;
 
     @OneToMany(mappedBy = "user")
-    private List<Unit> units = new ArrayList<>();
+    private List<Unit> units;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders;
+
+    @OneToMany(mappedBy = "user")
+    private List<IngredientMovement> ingredientMovements;
 
     @Column(nullable = false, insertable = false, updatable = false)
     private String kitchenId;
@@ -102,6 +105,14 @@ public class User  extends BaseEntity{
 
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    public List<IngredientMovement> getIngredientMovements() {
+        return ingredientMovements;
+    }
+
+    public void setIngredientMovements(List<IngredientMovement> ingredientMovements) {
+        this.ingredientMovements = ingredientMovements;
     }
 
     public List<Order> getOrders() {

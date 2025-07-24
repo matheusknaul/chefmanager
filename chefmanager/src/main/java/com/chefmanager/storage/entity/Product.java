@@ -24,6 +24,10 @@ public class Product extends BaseEntity{
     @Transient
     private List<Recipe> recipes;
 
+    @ManyToOne
+    @JoinColumn(name = "menu_id")
+    private Menu menu;
+
     @OneToMany(mappedBy = "product")
     private SalesOrderItem salesOrderItem;
 
@@ -37,25 +41,28 @@ public class Product extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 
-    public Product(String title, String description, ProductStatus productStatus) {
+    public Product(String title, String description, ProductStatus productStatus, Menu menu) {
         this.setTitle(title);
         this.setDescription(description);
         this.setProductStatus(productStatus);
         this.setRecipeCollection("empty");
+        this.setMenu(menu);
     }
 
-    public Product(String title, String description, List<Recipe> recipes, ProductStatus productStatus){
+    public Product(String title, String description, List<Recipe> recipes, ProductStatus productStatus,  Menu menu){
         this.setTitle(title);
         this.setDescription(description);
         this.setRecipeCollection(this.recipeListItensToString(recipes));
         this.setProductStatus(productStatus);
+        this.setMenu(menu);
     }
 
-    public Product(String title, String description){
+    public Product(String title, String description,  Menu menu){
         this.setTitle(title);
         this.setDescription(description);
         this.setRecipeCollection("empty");
         this.setProductStatus(ProductStatus.INACTIVE);
+        this.setMenu(menu);
     }
 
     protected Product(){}
@@ -90,6 +97,14 @@ public class Product extends BaseEntity{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     public String getDescription() {

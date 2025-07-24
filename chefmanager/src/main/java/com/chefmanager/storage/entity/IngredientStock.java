@@ -28,6 +28,9 @@ public class IngredientStock extends BaseEntity{
     @OneToMany(mappedBy = "stock")
     private Set<Unit> units = new HashSet<>();
 
+    @OneToMany(mappedBy = "stock")
+    private List<IngredientMovement> ingredientMovements;
+
     protected IngredientStock(){}
 
     protected IngredientStock(Kitchen kitchen){
@@ -45,6 +48,14 @@ public class IngredientStock extends BaseEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<IngredientMovement> getIngredientMovements() {
+        return ingredientMovements;
+    }
+
+    public void setIngredientMovements(List<IngredientMovement> ingredientMovements) {
+        this.ingredientMovements = ingredientMovements;
     }
 
     public Kitchen getKitchen() {

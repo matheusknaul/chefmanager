@@ -25,10 +25,7 @@ public class Ingredient extends BaseEntity{
     private IngredientStock stock;
 
     @OneToMany(mappedBy = "ingredient")
-    private List<IngredientEntry> entry;
-
-    @OneToMany(mappedBy = "ingredient")
-    private List<IngredientExit> exit;
+    private List<IngredientMovement> movement;
 
     @ManyToOne
     private User user;
@@ -83,20 +80,13 @@ public class Ingredient extends BaseEntity{
         this.stock = stock;
     }
 
-    public List<IngredientEntry> getEntry() {
-        return entry;
+
+    public List<IngredientMovement> getMovement() {
+        return movement;
     }
 
-    public void setEntry(List<IngredientEntry> entry) {
-        this.entry = entry;
-    }
-
-    public List<IngredientExit> getExit() {
-        return exit;
-    }
-
-    public void setExit(List<IngredientExit> exit) {
-        this.exit = exit;
+    public void setMovement(List<IngredientMovement> movement) {
+        this.movement = movement;
     }
 
     public Unit getUnit() {
